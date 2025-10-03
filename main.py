@@ -111,41 +111,40 @@ def to_local_time(utc_date):
 
 
 if __name__ == "__main__":
-    SPRINT_0 = Sprint("Sprint0",
-                      datetime(year=2024, month=9, day=13, tzinfo=ZoneInfo('US/Eastern')),
-                      datetime(year=2024, month=10, day=3, hour=9, minute=30, tzinfo=ZoneInfo('US/Eastern')))
+    # SPRINT_0 = Sprint("Sprint0",
+    #                   datetime(year=2024, month=9, day=13, tzinfo=ZoneInfo('US/Eastern')),
+    #                   datetime(year=2024, month=10, day=3, hour=9, minute=30, tzinfo=ZoneInfo('US/Eastern')))
 
     SPRINT_1 = Sprint("Sprint1",
                       start=datetime(year=2024, month=2, day=22, hour=15, minute=15, tzinfo=ZoneInfo('US/Eastern')),
-                      end=datetime(year=2024, month=3, day=14, hour=12, minute=30, tzinfo=ZoneInfo('US/Eastern')),
-                      first_week_cutoff=datetime(year=2024, month=3, day=2, hour=23, minute=59, tzinfo=ZoneInfo('US/Eastern'))
+                      end=datetime(year=2025, month=9, day=30, hour=9, minute=30, tzinfo=ZoneInfo('US/Eastern')),
                       )
 
-    SPRINT_2 = Sprint("Sprint2",
-                      datetime(year=2024, month=3, day=14, hour=15, minute=15, tzinfo=ZoneInfo('US/Eastern')),
-                      datetime(year=2024, month=3, day=26, hour=12, minute=30,
-                               tzinfo=ZoneInfo('US/Eastern')))  # class time the day after to include late night commits
+    # SPRINT_2 = Sprint("Sprint2",
+    #                   datetime(year=2024, month=3, day=14, hour=15, minute=15, tzinfo=ZoneInfo('US/Eastern')),
+    #                   datetime(year=2024, month=3, day=26, hour=12, minute=30,
+    #                            tzinfo=ZoneInfo('US/Eastern')))  # class time the day after to include late night commits
+    #
+    # SPRINT_3 = Sprint("Sprint3",
+    #                   start=datetime(year=2024, month=3, day=26, hour=15, minute=00, tzinfo=ZoneInfo('US/Eastern')),
+    #                   end=datetime(year=2024, month=4, day=9, hour=6, minute=00, tzinfo=ZoneInfo('US/Eastern')),
+    #                   first_week_cutoff=datetime(year=2024, month=4, day=4, hour=23, minute=59, tzinfo=ZoneInfo('US/Eastern')))
+    #
+    # SPRINT_4 = Sprint("Sprint4",
+    #                   datetime(year=2024, month=4, day=9, hour=15, minute=00, tzinfo=ZoneInfo('US/Eastern')),
+    #                   # Extra day
+    #                   datetime(year=2024, month=4, day=23, hour=15, minute=00, tzinfo=ZoneInfo('US/Eastern')),
+    #                   first_week_cutoff=datetime(year=2024, month=4, day=16, hour=23, minute=59, tzinfo=ZoneInfo('US/Eastern')))
+    #
+    # SPRINT_5_001 = Sprint("Sprint5",
+    #                       datetime(year=2023, month=12, day=5, hour=12, minute=30, tzinfo=ZoneInfo('US/Eastern')),
+    #                       datetime(year=2023, month=12, day=12, hour=12, minute=30, tzinfo=ZoneInfo('US/Eastern')))
+    #
+    # SPRINT_5_002 = Sprint("Sprint5",
+    #                       datetime(year=2023, month=12, day=5, hour=12, minute=30, tzinfo=ZoneInfo('US/Eastern')),
+    #                       datetime(year=2023, month=12, day=14, hour=12, minute=30, tzinfo=ZoneInfo('US/Eastern')))
 
-    SPRINT_3 = Sprint("Sprint3",
-                      start=datetime(year=2024, month=3, day=26, hour=15, minute=00, tzinfo=ZoneInfo('US/Eastern')),
-                      end=datetime(year=2024, month=4, day=9, hour=6, minute=00, tzinfo=ZoneInfo('US/Eastern')),
-                      first_week_cutoff=datetime(year=2024, month=4, day=4, hour=23, minute=59, tzinfo=ZoneInfo('US/Eastern')))
-
-    SPRINT_4 = Sprint("Sprint4",
-                      datetime(year=2024, month=4, day=9, hour=15, minute=00, tzinfo=ZoneInfo('US/Eastern')),
-                      # Extra day
-                      datetime(year=2024, month=4, day=23, hour=15, minute=00, tzinfo=ZoneInfo('US/Eastern')),
-                      first_week_cutoff=datetime(year=2024, month=4, day=16, hour=23, minute=59, tzinfo=ZoneInfo('US/Eastern')))
-
-    SPRINT_5_001 = Sprint("Sprint5",
-                          datetime(year=2023, month=12, day=5, hour=12, minute=30, tzinfo=ZoneInfo('US/Eastern')),
-                          datetime(year=2023, month=12, day=12, hour=12, minute=30, tzinfo=ZoneInfo('US/Eastern')))
-
-    SPRINT_5_002 = Sprint("Sprint5",
-                          datetime(year=2023, month=12, day=5, hour=12, minute=30, tzinfo=ZoneInfo('US/Eastern')),
-                          datetime(year=2023, month=12, day=14, hour=12, minute=30, tzinfo=ZoneInfo('US/Eastern')))
-
-    active_sprint = SPRINT_0
+    active_sprint = SPRINT_1
 
     from pathlib import Path
 
