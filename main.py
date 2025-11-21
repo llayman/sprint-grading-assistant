@@ -13,12 +13,14 @@ from github.GithubObject import NotSet
 
 import config
 
+
 @dataclass
 class Sprint:
     title: str
     start: datetime
     end: datetime
     first_week_cutoff: datetime = None
+
 
 class UserStats:
 
@@ -58,7 +60,8 @@ def get_stats_for_sprint(sprint: Sprint):
                 for assignee in i.assignees:
                     user_stats.setdefault(assignee.login, UserStats(assignee.login)).issues.append(i)
 
-        sprint_first_week_cutoff = sprint.first_week_cutoff if sprint.first_week_cutoff is not None else sprint.end - timedelta(days=7)
+        sprint_first_week_cutoff = sprint.first_week_cutoff if sprint.first_week_cutoff is not None else sprint.end - timedelta(
+            days=7)
         # Loop over user_stats dictionary to compute statistics on a per-user basis.
         for author, stats in user_stats.items():
             has_printed_cutoff = False
@@ -111,40 +114,52 @@ def to_local_time(utc_date):
 
 
 if __name__ == "__main__":
+    TZ = ZoneInfo('US/Eastern')
+    YEAR = datetime.now().year
+    CLASS_HOUR = 9
+    CLASS_MINUTE = 30
+    CLASS_DURATION = 75
+
+    def get_class_start(month, day, year=YEAR, hours=CLASS_HOUR, minutes=CLASS_MINUTE, tz=TZ):
+        return datetime(year, month, day, hours, minutes, tzinfo=tz)
+
+    def get_class_end(month, day, duration=CLASS_DURATION, year=YEAR, hours=CLASS_HOUR, minutes=CLASS_MINUTE, tz=TZ):
+        return datetime(year, month, day, hours, minutes, tzinfo=TZ) + timedelta(minutes=duration)
+
     # SPRINT_0 = Sprint("Sprint0",
-    #                   datetime(year=2024, month=9, day=13, tzinfo=ZoneInfo('US/Eastern')),
-    #                   datetime(year=2024, month=10, day=3, hour=9, minute=30, tzinfo=ZoneInfo('US/Eastern')))
+    #                   datetime(year=2024, month=9, day=13, tzinfo=TZ),
+    #                   datetime(year=2024, month=10, day=3, hour=9, minute=30, tzinfo=TZ))
 
     SPRINT_1 = Sprint("Sprint1",
-                      start=datetime(year=2024, month=2, day=22, hour=15, minute=15, tzinfo=ZoneInfo('US/Eastern')),
-                      end=datetime(year=2025, month=9, day=30, hour=9, minute=30, tzinfo=ZoneInfo('US/Eastern')),
+                      start=datetime(year=2024, month=2, day=22, hour=15, minute=15, tzinfo=TZ),
+                      end=get_class_start(9, 30)
                       )
 
-    # SPRINT_2 = Sprint("Sprint2",
-    #                   datetime(year=2024, month=3, day=14, hour=15, minute=15, tzinfo=ZoneInfo('US/Eastern')),
-    #                   datetime(year=2024, month=3, day=26, hour=12, minute=30,
-    #                            tzinfo=ZoneInfo('US/Eastern')))  # class time the day after to include late night commits
-    #
-    # SPRINT_3 = Sprint("Sprint3",
-    #                   start=datetime(year=2024, month=3, day=26, hour=15, minute=00, tzinfo=ZoneInfo('US/Eastern')),
-    #                   end=datetime(year=2024, month=4, day=9, hour=6, minute=00, tzinfo=ZoneInfo('US/Eastern')),
-    #                   first_week_cutoff=datetime(year=2024, month=4, day=4, hour=23, minute=59, tzinfo=ZoneInfo('US/Eastern')))
-    #
-    # SPRINT_4 = Sprint("Sprint4",
-    #                   datetime(year=2024, month=4, day=9, hour=15, minute=00, tzinfo=ZoneInfo('US/Eastern')),
-    #                   # Extra day
-    #                   datetime(year=2024, month=4, day=23, hour=15, minute=00, tzinfo=ZoneInfo('US/Eastern')),
-    #                   first_week_cutoff=datetime(year=2024, month=4, day=16, hour=23, minute=59, tzinfo=ZoneInfo('US/Eastern')))
+    SPRINT_2 = Sprint("Sprint2",
+                      start=get_class_end(9, 30),
+                      end=get_class_start(10, 16),
+                      first_week_cutoff=datetime(year=YEAR, month=10, day=8, hour=0, minute=0,
+                                                 tzinfo=TZ))
+
+    SPRINT_3 = Sprint("Sprint3",
+                      start=get_class_end(10, 16),
+                      end=get_class_start(10, 28),
+                      first_week_cutoff=datetime(year=YEAR, month=10, day=20, hour=23, minute=59, tzinfo=TZ))
+
+    SPRINT_4 = Sprint("Sprint4",
+                      start=get_class_end(10, 28),
+                      end=get_class_start(11, 11),
+                      first_week_cutoff=datetime(year=YEAR, month=11, day=3, hour=23, minute=59, tzinfo=TZ))
     #
     # SPRINT_5_001 = Sprint("Sprint5",
-    #                       datetime(year=2023, month=12, day=5, hour=12, minute=30, tzinfo=ZoneInfo('US/Eastern')),
-    #                       datetime(year=2023, month=12, day=12, hour=12, minute=30, tzinfo=ZoneInfo('US/Eastern')))
+    #                       datetime(year=2023, month=12, day=5, hour=12, minute=30, tzinfo=TZ),
+    #                       datetime(year=2023, month=12, day=12, hour=12, minute=30, tzinfo=TZ))
     #
     # SPRINT_5_002 = Sprint("Sprint5",
-    #                       datetime(year=2023, month=12, day=5, hour=12, minute=30, tzinfo=ZoneInfo('US/Eastern')),
-    #                       datetime(year=2023, month=12, day=14, hour=12, minute=30, tzinfo=ZoneInfo('US/Eastern')))
+    #                       datetime(year=2023, month=12, day=5, hour=12, minute=30, tzinfo=TZ),
+    #                       datetime(year=2023, month=12, day=14, hour=12, minute=30, tzinfo=TZ))
 
-    active_sprint = SPRINT_1
+    active_sprint = SPRINT_4
 
     from pathlib import Path
 
