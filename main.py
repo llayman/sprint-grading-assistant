@@ -150,16 +150,14 @@ if __name__ == "__main__":
                       start=get_class_end(10, 28),
                       end=get_class_start(11, 11),
                       first_week_cutoff=datetime(year=YEAR, month=11, day=3, hour=23, minute=59, tzinfo=TZ))
-    #
-    # SPRINT_5_001 = Sprint("Sprint5",
-    #                       datetime(year=2023, month=12, day=5, hour=12, minute=30, tzinfo=TZ),
-    #                       datetime(year=2023, month=12, day=12, hour=12, minute=30, tzinfo=TZ))
+
+    SPRINT_5 = Sprint("Sprint5", start=get_class_end(11,11), end=get_class_start(11,25))
     #
     # SPRINT_5_002 = Sprint("Sprint5",
     #                       datetime(year=2023, month=12, day=5, hour=12, minute=30, tzinfo=TZ),
     #                       datetime(year=2023, month=12, day=14, hour=12, minute=30, tzinfo=TZ))
 
-    active_sprint = SPRINT_4
+    active_sprint = SPRINT_5
 
     from pathlib import Path
 
