@@ -102,7 +102,7 @@ def get_stats_for_sprint(sprint: Sprint):
 
             log.info(f'\tPRs:{len(stats.pulls)}, {pr_stats}')
             for p in stats.pulls:
-                log.info(f"\t\t{to_local_time(p.created_at)} {p.html_url}")
+                log.info(f"\t\t{to_local_time(p.created_at)} {p.head.ref} {p.html_url}")
 
 
 def to_local_time(utc_date):
@@ -116,19 +116,19 @@ def to_local_time(utc_date):
 if __name__ == "__main__":
     TZ = ZoneInfo('US/Eastern')
     YEAR = datetime.now().year
-    CLASS_HOUR = 9
-    CLASS_MINUTE = 30
-    CLASS_DURATION = 75
+    CLASS_HOUR = 11
+    CLASS_MINUTE = 00
+    CLASS_DURATION = 50
 
     def get_class_start(month, day, year=YEAR, hours=CLASS_HOUR, minutes=CLASS_MINUTE, tz=TZ):
         return datetime(year, month, day, hours, minutes, tzinfo=tz)
 
     def get_class_end(month, day, duration=CLASS_DURATION, year=YEAR, hours=CLASS_HOUR, minutes=CLASS_MINUTE, tz=TZ):
-        return datetime(year, month, day, hours, minutes, tzinfo=TZ) + timedelta(minutes=duration)
+        return datetime(year, month, day, hours, minutes, tzinfo=tz) + timedelta(minutes=duration)
 
-    # SPRINT_0 = Sprint("Sprint0",
-    #                   datetime(year=2024, month=9, day=13, tzinfo=TZ),
-    #                   datetime(year=2024, month=10, day=3, hour=9, minute=30, tzinfo=TZ))
+    SPRINT_0 = Sprint("Sprint0",
+                      datetime(year=2026, month=2, day=1, tzinfo=TZ),
+                      get_class_start(month=2, day=23))
 
     SPRINT_1 = Sprint("Sprint1",
                       start=datetime(year=2024, month=2, day=22, hour=15, minute=15, tzinfo=TZ),
@@ -157,7 +157,7 @@ if __name__ == "__main__":
     #                       datetime(year=2023, month=12, day=5, hour=12, minute=30, tzinfo=TZ),
     #                       datetime(year=2023, month=12, day=14, hour=12, minute=30, tzinfo=TZ))
 
-    active_sprint = SPRINT_5
+    active_sprint = SPRINT_0
 
     from pathlib import Path
 
