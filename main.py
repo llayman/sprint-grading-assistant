@@ -131,9 +131,9 @@ if __name__ == "__main__":
                       get_class_start(month=2, day=23))
 
     SPRINT_1 = Sprint("Sprint1",
-                      start=datetime(year=2024, month=2, day=22, hour=15, minute=15, tzinfo=TZ),
-                      end=get_class_start(9, 30)
-                      )
+                start=get_class_end(month=2, day=23),
+                end=datetime(year=2026, month=3, day=11, hour=0, minute=0, tzinfo=TZ),
+                first_week_cutoff=datetime(year=2026, month=2, day=28, hour=0, minute=0, tzinfo=TZ))
 
     SPRINT_2 = Sprint("Sprint2",
                       start=get_class_end(9, 30),
