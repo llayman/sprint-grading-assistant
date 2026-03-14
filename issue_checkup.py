@@ -1,12 +1,16 @@
+"""Scrape and summarize GitHub issues by milestone across configured repositories."""
+
 import config
 
 
 def scrape_issues(title, print_issues=True):
+    """Scrape issues by milestone across configured repos and print assignee summaries."""
     for repo in config.REPOS:
         r = config.org.get_repo(repo)
         print('=' * 10)
         print(r.full_name)
-        member_issues = {m: [] for m in map(lambda x: x.login, filter(lambda x: x.login != 'llayman', r.get_collaborators()))}
+        collaborators = filter(lambda x: x.login != 'llayman', r.get_collaborators())
+        member_issues = {m: [] for m in map(lambda x: x.login, collaborators)}
 
         milestones = list(r.get_milestones())
         milestone = next((x for x in milestones if x.title.strip() == title), None)
