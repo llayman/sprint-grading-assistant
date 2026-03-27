@@ -158,13 +158,19 @@ if __name__ == "__main__":
                 start=get_class_end(month=2, day=23),
                 end=datetime(year=2026, month=3, day=11, hour=0, minute=0, tzinfo=TZ),
                 first_week_cutoff=datetime(
-                    year=2026, month=2, day=28, hour=0, minute=0, tzinfo=TZ))
+                    year=YEAR, month=2, day=28, hour=0, minute=0, tzinfo=TZ))
 
     SPRINT_2 = Sprint("Sprint2",
-                      start=get_class_end(9, 30),
-                      end=get_class_start(10, 16),
-                      first_week_cutoff=datetime(year=YEAR, month=10, day=8, hour=0, minute=0,
+                      start=get_class_end(3, 11),
+                      end=datetime(year=2026, month=3, day=25, hour=0, minute=0, tzinfo=TZ),
+                      first_week_cutoff=datetime(year=YEAR, month=3, day=18, hour=0, minute=0,
                                                  tzinfo=TZ))
+    
+    SPRINT_2_TEAM_5 = Sprint("Sprint2 Team 5",
+                    start=get_class_end(3, 11),
+                    end=datetime(year=2026, month=3, day=27, hour=0, minute=0, tzinfo=TZ),
+                    first_week_cutoff=datetime(year=YEAR, month=3, day=18, hour=0, minute=0,
+                                                tzinfo=TZ))
 
     SPRINT_3 = Sprint("Sprint3",
                       start=get_class_end(10, 16),
@@ -184,7 +190,7 @@ if __name__ == "__main__":
     #                       datetime(year=2023, month=12, day=5, hour=12, minute=30, tzinfo=TZ),
     #                       datetime(year=2023, month=12, day=14, hour=12, minute=30, tzinfo=TZ))
 
-    active_sprint = SPRINT_1
+    active_sprint = SPRINT_2_TEAM_5
 
     from pathlib import Path
 
