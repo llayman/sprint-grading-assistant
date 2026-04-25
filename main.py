@@ -291,10 +291,10 @@ if __name__ == "__main__":
                           year=YEAR, month=4, day=1, hour=00, minute=00, tzinfo=TZ))
 
     SPRINT_4 = Sprint("Sprint4",
-                      start=get_class_end(10, 28),
-                      end=get_class_start(11, 11),
+                      start=get_class_end(4, 8),
+                      end=datetime(year=2026, month=4, day=20, hour=6, minute=0, tzinfo=TZ),
                       first_week_cutoff=datetime(
-                          year=YEAR, month=11, day=3, hour=23, minute=59, tzinfo=TZ))
+                          year=YEAR, month=4, day=13, hour=23, minute=59, tzinfo=TZ))
 
     SPRINT_5 = Sprint("Sprint5", start=get_class_end(11,11), end=get_class_start(11,25))
     #
@@ -302,10 +302,12 @@ if __name__ == "__main__":
     #                       datetime(year=2023, month=12, day=5, hour=12, minute=30, tzinfo=TZ),
     #                       datetime(year=2023, month=12, day=14, hour=12, minute=30, tzinfo=TZ))
 
-    active_sprint = SPRINT_3
+    active_sprint = SPRINT_4
+
     # Prior log for issue delta in each member's Issues section (same logic as
-    # compare_sprints.py). Example for Sprint3: Path("logs/Sprint2.log"). None = flat list.
-    PREVIOUS_SPRINT_ISSUE_LOG: Optional[Path] = Path("logs/Sprint2.log")
+    # compare_sprints.py). Derived from active_sprint title (e.g. "Sprint4" -> logs/Sprint3.log).
+    prev_sprint_num = active_sprint.title.find(r"Sprint(\d+)")
+    PREVIOUS_SPRINT_ISSUE_LOG: Optional[Path] = Path("logs") / f'Sprint{prev_sprint_num}.log' if prev_sprint_num > -1 else None
 
     # creating a new directory called logs
     Path("logs").mkdir(exist_ok=True)
@@ -317,6 +319,12 @@ if __name__ == "__main__":
             logging.FileHandler(Path('logs') / f'{active_sprint.title}.log', 'w+')
         ]
     )
+
+    log = logging.getLogger()
+    log.info('=' * 50)
+    log.info('  ACTIVE SPRINT: %s', active_sprint.title)
+    log.info('  %s  -->  %s', active_sprint.start.strftime(_OUTPUT_DATE_FMT), active_sprint.end.strftime(_OUTPUT_DATE_FMT))
+    log.info('=' * 50)
 
     get_stats_for_sprint(
         active_sprint,
