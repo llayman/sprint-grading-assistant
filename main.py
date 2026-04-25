@@ -1,5 +1,6 @@
 """Sprint grading assistant: aggregates GitHub PRs, commits, and issues per user for a sprint."""
 import logging
+import re
 import sys
 from dataclasses import dataclass
 from datetime import datetime, timezone, timedelta
@@ -306,8 +307,8 @@ if __name__ == "__main__":
 
     # Prior log for issue delta in each member's Issues section (same logic as
     # compare_sprints.py). Derived from active_sprint title (e.g. "Sprint4" -> logs/Sprint3.log).
-    prev_sprint_num = active_sprint.title.find(r"Sprint(\d+)")
-    PREVIOUS_SPRINT_ISSUE_LOG: Optional[Path] = Path("logs") / f'Sprint{prev_sprint_num}.log' if prev_sprint_num > -1 else None
+    _m = re.search(r"Sprint(\d+)", active_sprint.title)
+    PREVIOUS_SPRINT_ISSUE_LOG: Optional[Path] = Path("logs") / f'Sprint{int(_m.group(1)) - 1}.log' if _m else None
 
     # creating a new directory called logs
     Path("logs").mkdir(exist_ok=True)
