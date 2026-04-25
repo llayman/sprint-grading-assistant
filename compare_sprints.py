@@ -36,7 +36,7 @@ class IssueEntry:
 # Matches issue lines like:
 #   \t\tOPEN (Sprint 3) #122 US: Controls Instructions https://github.com/.../issues/122
 _ISSUE_RE = re.compile(
-    r"^\t\t(OPEN|CLOSED)\s+\(([^)]*)\)\s+#(\d+)\s+(.*?)\s+(https://\S+)\s*$"
+    r"^\t{2,3}(OPEN|CLOSED)\s+\(([^)]*)\)\s+#(\d+)\s+(.*?)\s+(https://\S+)\s*$"
 )
 
 # Matches user header lines like:
