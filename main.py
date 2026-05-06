@@ -297,13 +297,11 @@ if __name__ == "__main__":
                       first_week_cutoff=datetime(
                           year=YEAR, month=4, day=13, hour=23, minute=59, tzinfo=TZ))
 
-    SPRINT_5 = Sprint("Sprint5", start=get_class_end(11,11), end=get_class_start(11,25))
-    #
-    # SPRINT_5_002 = Sprint("Sprint5",
-    #                       datetime(year=2023, month=12, day=5, hour=12, minute=30, tzinfo=TZ),
-    #                       datetime(year=2023, month=12, day=14, hour=12, minute=30, tzinfo=TZ))
+    SPRINT_5 = Sprint("Sprint5", start=get_class_end(4, 20), 
+         end=datetime(year=2026, month=5, day=6, hour=11, minute=30, tzinfo=TZ),)
 
-    active_sprint = SPRINT_4
+
+    active_sprint = SPRINT_5
 
     # Prior log for issue delta in each member's Issues section (same logic as
     # compare_sprints.py). Derived from active_sprint title (e.g. "Sprint4" -> logs/Sprint3.log).
